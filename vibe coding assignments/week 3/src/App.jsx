@@ -14,11 +14,11 @@ const BUG_NAMES = [
 ];
 
 const LUFFY_IMAGES = [
-  '/luffy_0.png',
-  '/luffy_1.png',
-  '/luffy_2.png',
-  '/luffy_3.png',
-  '/luffy_3.png' // We will use CSS filter for Gear 5
+  'luffy_0.png',
+  'luffy_1.png',
+  'luffy_2.png',
+  'luffy_3.png',
+  'luffy_3.png' // We will use CSS filter for Gear 5
 ];
 
 export default function App() {
@@ -148,7 +148,7 @@ export default function App() {
   };
 
   return (
-    <div className="game-container">
+    <div className="game-container" style={{ backgroundImage: `url('${import.meta.env.BASE_URL}bg.png')` }}>
       <div className="game-overlay"></div>
       
       {animeText && <div className="anime-text" key={Date.now()}>{animeText}</div>}
@@ -156,7 +156,7 @@ export default function App() {
       {/* Kaido Element */}
       <div className={`kaido-container ${kaidoShake ? 'kaido-shake' : ''}`}>
         <img 
-          src="/kaido.png" 
+          src={`${import.meta.env.BASE_URL}kaido.png`} 
           alt="Kaido" 
           className="kaido-img" 
           style={{ transform: `scale(${kaidoScale})`, transformOrigin: 'bottom right' }}
@@ -166,7 +166,7 @@ export default function App() {
       {/* Luffy Element */}
       <div className={`luffy-container ${luffyBounce ? 'luffy-bounce' : ''}`}>
         <img 
-          src={LUFFY_IMAGES[level - 1]} 
+          src={`${import.meta.env.BASE_URL}${LUFFY_IMAGES[level - 1]}`} 
           alt={`Luffy Gear ${level}`} 
           className={`luffy-img luffy-form-${level - 1}`} 
         />
