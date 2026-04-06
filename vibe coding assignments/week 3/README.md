@@ -78,23 +78,20 @@ const getActualValidation_Level1 = (pwd) => {
 ## ⚠️ Limitations
 
 ### Limitations of Equivalence Class Testing
-* It may miss defects that occur only at edge values.
-* It assumes all values in a class behave the same way.
-* It is less effective when internal state or workflow matters more than simple input categories.
+* **Misses Edges:** Equivalence testing assumes all characters inside the "Valid" bucket behave the same. It might successfully test "Password5!" but will completely miss the fact that the developer accidentally rejected the exact length boundaries of 8 or 15 characters (like in Level 1).
+* **Limited to Categories:** It is less effective when internal states matter more than simple input categories (like tracking how many login attempts a user has left).
 
 ### Limitations of Boundary Class Testing
-* It focuses heavily on edges and may overlook non-boundary combinations.
-* It is less useful when inputs do not have clear numeric, size, or ordered limits.
-* It does not replace broader scenario, workflow, or integration testing.
+* **Tunnel Vision at the Edges:** Boundary testing focuses heavily on edge cases (like testing strings of exactly 8 or 16 characters) and can easily overlook combinations happening in the middle.
+* **Requires Clear Limits:** It's fantastic for our 8-15 character limit rule, but it is largely useless for rules that don't have ordered, numeric limits (like our "must contain a special character" rule).
 
 ### When Not To Use Them Alone
-Do not rely on these techniques alone when:
-* Business rules depend on combinations of multiple fields.
-* System behavior depends on sequence, timing, or state transitions.
-* Testing involves user workflows rather than isolated inputs.
-* Risk is tied to integrations, security, concurrency, or performance.
+These Black-box techniques are incredible for simple, isolated input validation (like checking a single password field). However, do not rely on them alone when:
+* **Complex Combinations:** Rules depend on combinations of multiple fields working together (e.g., verifying "Password" and "Confirm Password" match).
+* **Workflows & State:** System behavior depends on sequence or state transitions (e.g., locking out a user's account after 5 failed password attempts).
+* **System Risks:** Testing requires checking for SQL injection vulnerabilities, security issues, or backend server concurrency.
 
-In those cases, combine them with other techniques such as decision table testing, state transition testing, use case testing, integration testing, and exploratory testing.
+In those more complex scenarios, combine these input tests with broader techniques such as decision table testing, state transition testing, exploratory testing, and security-focused integration testing.
 
 ### 🎮 Ready to Play?
 Try the QA Game live right here:
