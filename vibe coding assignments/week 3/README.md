@@ -75,10 +75,26 @@ const getActualValidation_Level1 = (pwd) => {
 
 ---
 
-## ⚠️ Summary and Limitations
+## ⚠️ Limitations
 
-* **Boundary tests are required:** Equivalence testing might assume all values in a class behave the same. Always test the edges!
-* **Inputs vs Workflows:** These techniques are amazing for forms and inputs (like passwords), but testers shouldn't use them alone. They won't catch security or server issues.
+### Limitations of Equivalence Class Testing
+* It may miss defects that occur only at edge values.
+* It assumes all values in a class behave the same way.
+* It is less effective when internal state or workflow matters more than simple input categories.
+
+### Limitations of Boundary Class Testing
+* It focuses heavily on edges and may overlook non-boundary combinations.
+* It is less useful when inputs do not have clear numeric, size, or ordered limits.
+* It does not replace broader scenario, workflow, or integration testing.
+
+### When Not To Use Them Alone
+Do not rely on these techniques alone when:
+* Business rules depend on combinations of multiple fields.
+* System behavior depends on sequence, timing, or state transitions.
+* Testing involves user workflows rather than isolated inputs.
+* Risk is tied to integrations, security, concurrency, or performance.
+
+In those cases, combine them with other techniques such as decision table testing, state transition testing, use case testing, integration testing, and exploratory testing.
 
 ### 🎮 Ready to Play?
 Try the QA Game live right here:
