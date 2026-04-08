@@ -63,14 +63,15 @@ An **Application Performance Index (Apdex)** is an open international standard f
 ### Test 1: Endurance Test
 For the Endurance Test, we sustained a moderate payload against the deployed GitHub Pages application. 
 * **Results:** As seen in the screenshots, the Endurance test successfully managed 12,726 requests. The server handled the steady traffic beautifully, yielding a very fast **Average Response Time of 104 ms**. The error rate was phenomenally low at `0.08%`, indicating exceptional endurance stability from GitHub Pages.
-
-*(Please insert your Endurance Test Summary Report screenshot here)*
-
+![http_RE.png](http_RE.png)
+![img_1.png](img_1.png)
+![end_summary.png](end_summary.png)
 ### Test 2: Spike Test
 For the spike test, we hammered the exact same endpoint with 500 Threads (Users) within a 1-second ramp-up period.
 * **Results:** The aggressive burst of 500 simultaneous users caused the server queuing to increase. The **Average Response Time nearly tripled to 292 ms** (and maxed out at 973 ms). Remarkably, GitHub Pages handled the massive burst with a `0.00%` error rate, serving every single spike request successfully without crashing or applying severe rate limits.
+![img.png](img.png)
+![spicke_summary.png](spicke_summary.png)
 
-*(Please insert your Spike Test Summary Report, HTTP Request, and HTTP Header Manager screenshots here)*
 
 ---
 
@@ -86,4 +87,3 @@ If we were evaluating the backend server on a Virtual Machine instead of GitHub 
 ## Conclusion and Recommendations
 **Summary:** Through this integration and performance testing assignment, I learned how to utilize Apache JMeter to construct realistic deployment scenarios. I was able to quantify the exact difference between steady website traffic (104ms response) and abrupt viral traffic (292ms delayed response). I successfully deployed a front-end application and utilized HTTP samplers and header managers to probe the API/routing infrastructure.
 
-**Recommendations:** To improve this assignment, it could be beneficial to introduce an intentional bottleneck (like a slow API or an unoptimized backend database) so students can experience a system actually crushing under Stress/Spike testing, as GitHub Pages is notoriously difficult to crash for demonstration purposes.
