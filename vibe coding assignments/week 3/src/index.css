@@ -566,3 +566,114 @@ body {
   color: #f97316;
   font-weight: 800;
 }
+
+/* ─── Rules toggle button ─── */
+.rules-toggle-btn {
+  width: 100%;
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.4);
+  border-radius: 10px;
+  color: #f97316;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  padding: 10px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+.rules-toggle-btn:hover {
+  background: rgba(249, 115, 22, 0.2);
+}
+
+/* ─── Two-column layout for decision game ─── */
+.decision-layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.decision-inputs-col {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Tested combos log panel ─── */
+.tested-log-col {
+  width: 260px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  max-height: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tested-log-header {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffcc00;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+.tested-log-list {
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tested-log-item {
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 0.78rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.log-bug {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.log-ok {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+.log-combo {
+  color: #ccc;
+  line-height: 1.4;
+}
+
+.log-result {
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.log-bug .log-result {
+  color: #60a5fa;
+}
+
+.log-ok .log-result {
+  color: #4ade80;
+}
+
+@media (max-width: 700px) {
+  .decision-layout {
+    flex-direction: column;
+  }
+  .tested-log-col {
+    width: 100%;
+    max-height: 200px;
+  }
+}
