@@ -380,3 +380,189 @@ body {
   margin-top: 15px;
   animation: bounceLuffy 0.5s;
 }
+
+/* ─── Back button ─── */
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 20;
+  background: rgba(0,0,0,0.6);
+  color: #ffcc00;
+  border: 1px solid #ffcc00;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.back-btn:hover {
+  background: #ffcc00;
+  color: #111;
+}
+
+/* ─── Main Menu ─── */
+.menu-bg {
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0f0f1a 100%);
+}
+
+.menu-grid {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 860px;
+}
+
+.menu-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 380px;
+  background: rgba(20, 20, 35, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 36px 28px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  backdrop-filter: blur(14px);
+}
+.menu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(255, 204, 0, 0.18);
+  border-color: rgba(255, 204, 0, 0.4);
+}
+
+.menu-card-icon {
+  font-size: 3.5rem;
+  margin-bottom: 12px;
+}
+
+.menu-card-badge {
+  background: #ef4444;
+  color: white;
+  padding: 3px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.menu-card-title {
+  font-family: 'Bangers', cursive;
+  font-size: 2rem;
+  color: #ffcc00;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.menu-card-desc {
+  font-size: 0.95rem;
+  color: #bbb;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.menu-card-desc strong {
+  color: #fff;
+}
+
+.menu-play-btn {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 32px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.menu-play-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+/* ─── Decision Game ─── */
+.sanji-bg {
+  background: radial-gradient(ellipse at center, #1c1100 0%, #0f0a00 100%);
+}
+
+.sanji-container {
+  position: absolute;
+  bottom: 0;
+  right: 3%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.sanji-silhouette {
+  font-size: 10rem;
+  filter: drop-shadow(0 0 30px rgba(249, 115, 22, 0.6));
+  line-height: 1;
+}
+
+.sanji-float {
+  color: #f97316 !important;
+  text-shadow: 2px 2px 0 #7c2d12, -2px -2px 0 #7c2d12, 2px -2px 0 #7c2d12, -2px 2px 0 #7c2d12, 0 0 20px #f97316 !important;
+}
+
+.decision-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.decision-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.decision-group label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffcc00;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.toggle-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.toggle-btn {
+  flex: 1;
+  min-width: 100px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #ccc;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.toggle-btn:hover {
+  border-color: rgba(249, 115, 22, 0.5);
+  color: white;
+}
+.toggle-btn.active {
+  background: rgba(249, 115, 22, 0.2);
+  border-color: #f97316;
+  color: #f97316;
+  font-weight: 800;
+}

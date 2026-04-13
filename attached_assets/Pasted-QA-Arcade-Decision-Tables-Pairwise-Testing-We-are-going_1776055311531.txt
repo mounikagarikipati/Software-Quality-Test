@@ -1,0 +1,46 @@
+QA Arcade: Decision Tables & Pairwise Testing
+We are going to refactor the existing "Password Bug Hunt" into a multi-module QA Arcade. The user will start at a Main Menu and can select which testing concept they want to practice.
+
+Proposed Changes
+1. Refactoring Architecture (State-based Navigation)
+Instead of installing heavy routing libraries, we will use React State to manage the active "screen".
+
+[MODIFY] src/App.js
+Convert App.js to be the "Router" that holds a currentScreen state (e.g., 'menu', 'password_game', 'decision_game').
+Renders the MainMenu or the selected game component.
+[NEW] src/components/MainMenu.js
+A hub screen that lists the available games:
+🎮 Level 1: Password Bug Hunt (Boundary/Equivalence)
+🎮 Level 2: The Pirate E-Commerce (Decision Tables / Pairwise)
+[NEW] src/components/PasswordGame.js
+Move the entire existing logic from App.js (including Luffy/Kaido images, password validation logic, etc.) into this dedicated component so it doesn't clutter the main file.
+2. The Decision Table Game
+To teach Decision Tables and Pairwise Testing, we need an environment with multiple complex rules that interact with each other.
+
+[NEW] src/components/DecisionGame.js
+The Concept: "Sanji's Restaurant Bill Calculator" (Keeping the One Piece vibe). A decision table requires evaluating combinations of inputs to determine an output.
+
+Inputs to toggle:
+Customer Type: (Marine, Pirate, Civilian)
+Is Starving: (Yes / No)
+Day of Week: (Weekday / Weekend)
+Expected System: Perfect logic calculating a discount (e.g. "If Starving AND Pirate -> Free Food. If Marine AND Weekend -> Double Price.")
+Buggy System: Has a hidden flaw. For example, the system forgets to charge Marines double on weekends.
+The Gameplay: The player has to select different combinations from the dropdowns/checkboxes until they find an output where the Expected System differs from the Buggy System!
+3. Images and Assets
+We will use the generate_image tool to create new assets for this 2nd level (e.g., a background of the Baratie restaurant, and sprites for Sanji).
+
+Open Questions
+Before we execute, please let me know your thoughts on these questions:
+
+IMPORTANT
+
+Theme Check: Is "Sanji's Restaurant" calculating discounts a good theme for the Decision Table game? Or would you prefer a classic Enterprise example like a "Bank Loan Approval System"?
+Pairwise Testing: Pairwise is usually about testing combinations of settings (like OS + Browser + Resolution). Do you want Pairwise to be bundled into Level 2, or should we make it a Level 3?
+Navigation: I plan to just use React State to swap out the screens. Do you want me to install a routing library like react-router-dom instead so that each game has its own URL path?
+Verification Plan
+Manual Verification
+Start the server on npm start.
+Verify the main menu loads correctly.
+Click into the Password Game to ensure no existing functionality is broken.
+Play through the new Decision Table game and ensure the win condition fires when the correct combinations are selected.
