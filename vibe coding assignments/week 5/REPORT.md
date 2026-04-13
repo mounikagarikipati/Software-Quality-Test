@@ -1,32 +1,16 @@
 # QA Arcade — Vibe Coding Assignment Report
 
 **Course:** Software Quality Assurance
-**Assignment:** Vibe Coding — Week 3
+**Assignment:** Vibe Coding — Week 5
 **App:** [QA Arcade (Live Demo)](https://mounikagarikipati.github.io/Software-Quality-Test/vibe%20coding%20assignments/week%203/)
 
----
+
 
 ## Introduction
 
 This project covers two foundational test-case design methodologies: **Boundary Value Analysis (BVA) with Equivalence Partitioning** and **Decision Table Testing**. Both are black-box testing techniques, meaning they require no knowledge of the internal source code — only the specification of how the system is supposed to behave.
 
-### Boundary Value Analysis & Equivalence Partitioning
 
-**What it is:**
-Equivalence Partitioning divides input data into groups (partitions) where every value in a group is expected to behave the same way. Boundary Value Analysis extends this by specifically testing the edges of those partitions — the values just at, just below, and just above each boundary — since defects cluster disproportionately around boundaries.
-
-**When to use it:**
-- When inputs have a well-defined numeric range (e.g., password length 8–15 characters)
-- When the specification defines explicit valid/invalid zones
-- Early in testing when exhaustive testing is impossible
-
-**Limitations:**
-- Does not handle combinations of multiple inputs well — BVA tests one variable at a time while holding others constant
-- A faulty interaction between two valid inputs will go undetected
-- Requires clear, numeric boundaries; it does not apply to inputs without ordered ranges (e.g., color names)
-- Boundary selection depends entirely on the specification — a wrong spec produces wrong tests
-
----
 
 ### Decision Table Testing
 
@@ -44,7 +28,6 @@ Decision Table Testing is used when system behavior depends on a combination of 
 - Reduced decision tables (collapsing "don't care" columns) require careful analysis to avoid hiding defects
 - Does not by itself cover boundary values within the conditions
 
----
 
 ## Vibe Coding Assignment
 
@@ -64,70 +47,6 @@ The app launches with a hub screen where the player selects a level. Each card i
 
 ---
 
-### Level 1 — Password Bug Hunt (BVA & Equivalence Partitioning)
-
-The player submits passwords to a **deliberately buggy** validator and compares the Expected Output (correct specification) against the Actual Output (buggy system). When a discrepancy is found, a bug is exposed and the player advances to the next level.
-
-![Level 1 — Password Bug Hunt](docs/screenshot-level1.jpg)
-
-**Password Validation Specification:**
-| Rule | Valid Condition |
-|------|----------------|
-| Length | 8–15 characters (inclusive) |
-| Numbers | At least one digit (0–9) |
-| Special Characters | At least one from `!@#$%^&*()?><` |
-
-**The 5 planted bugs (one per level):**
-
-| Level | Bug Description | Example that exposes it |
-|-------|----------------|------------------------|
-| 1 | Length check uses `> 8` and `< 15` instead of `>= 8` and `<= 15` | Password exactly 8 or 15 chars |
-| 2 | Number regex is `[1-8]` — misses `0` and `9` | Password containing only `0` or `9` as its digit |
-| 3 | Special character check is missing entirely | Password with no special char still passes |
-| 4 | Conditions use `OR` instead of `AND` — any single rule passing makes it valid | Password with only length, no digits or specials |
-| 5 | Special char check is `[^a-zA-Z0-9]` — accepts any non-alphanumeric (e.g., space, `~`) | Password using `~` or space as special char |
-
-**Core BVA logic (correct expected system):**
-```jsx
-const getExpectedValidation = (pwd) => {
-  const len = pwd.length >= 8 && pwd.length <= 15;   // boundary: 8 and 15 are VALID
-  const num = /[0-9]/.test(pwd);
-  const spec = /[!@#$%^&*()?><]/.test(pwd);
-  return len && num && spec;
-};
-```
-
-**Level 1 buggy system (boundary exclusion bug):**
-```jsx
-case 1:
-  // Bug: Excludes boundaries 8 and 15 — uses strict inequalities
-  const len1 = pwd.length > 8 && pwd.length < 15;
-  return len1 && /[0-9]/.test(pwd) && /[!@#$%^&*()?><]/.test(pwd);
-```
-
-**Level 4 buggy system (logical operator bug):**
-```jsx
-case 4:
-  // Bug: OR instead of AND — one passing rule makes the whole thing pass
-  return len4 || num4 || spec4;
-```
-
-#### Sunny Day Scenarios (should PASS — no bug triggered)
-
-| Password | Equivalence Class | Expected | Actual (L1) | Bug Found? |
-|----------|-----------------|----------|-------------|------------|
-| `Hello12!` | Valid: 8 chars, has digit, has special | Valid | Valid | No — both agree |
-| `Testing1@test` | Valid: 13 chars, all rules met | Valid | Valid | No — both agree |
-
-#### Rainy Day Scenarios (should FAIL — or expose a bug)
-
-| Password | Test Intent | Expected | Actual (L1) | Bug Found? |
-|----------|------------|----------|-------------|------------|
-| `Hello12!` | Exactly 8 chars — boundary | Valid | **Invalid** | **YES** — L1 bug exposed |
-| `Testing5!!!!!!!` | Exactly 15 chars — boundary | Valid | **Invalid** | **YES** — L1 bug exposed |
-| `Short1!` | 7 chars — below min | Invalid | Invalid | No — both agree |
-
----
 
 ### Level 2 — Sanji's Restaurant (Decision Table Testing)
 
@@ -199,7 +118,7 @@ if (ct === 'Civilian' && starving === 'No' && loyalty === 'No' && day === 'Weeke
 ### Problems Encountered
 
 **1. Scope creep in the decision table complexity.**
-Designing a decision table with enough depth to make the game challenging without becoming unmanageable was harder than expected. The initial version with 3 inputs and 2 bugs was too easy — players could find both bugs in 4 tries by brute force. Adding a 4th input (Loyalty Card) expanded the combination space to 24 while making systematic test design genuinely necessary.
+Designing a decision table with enough depth to make the game challenging without becoming unmanageable was harder than expected. The initial version with 3 inputs and 2 bugs was too easy players could find both bugs in 4 tries by brute force. Adding a 4th input (Loyalty Card) expanded the combination space to 24 while making systematic test design genuinely necessary.
 
 **2. Making bugs feel "plausible."**
 The most difficult design challenge was ensuring each bug felt like a realistic developer mistake (forgetting a special case, using the wrong operator) rather than arbitrary randomness. The bugs had to be logically consistent with what a developer might actually write incorrectly under time pressure.
@@ -214,11 +133,11 @@ Because the app uses state-based navigation rather than URL-based routing, scree
 
 ### What I Learned About AI Tools
 
-**Speed vs. accuracy.** AI coding tools (used via Replit Agent) are exceptionally fast at scaffolding boilerplate — component structure, CSS, state management — but require human judgment to define *what* the bugs should be and *why* they teach a testing concept. The AI writes the code; the educator must design the pedagogy.
+**Speed vs. accuracy.** AI coding tools (used via Replit Agent) are exceptionally fast at scaffolding boilerplate component structure, CSS, state management but require human judgment to define *what* the bugs should be and *why* they teach a testing concept. The AI writes the code; the educator must design the pedagogy.
 
 **Iterative refinement works well.** Starting with a simpler 2-bug, 3-input version and iteratively adding complexity (4th input, 4 bugs, hidden rules, combo tracker) worked better than trying to design the full system upfront. Each iteration was a working, testable app.
 
-**AI excels at pattern completion.** Once the structure of one game level (PasswordGame) was established, the AI could generate the second level (DecisionGame) following the same architecture patterns — components, state shape, CSS class conventions — with high fidelity.
+**AI excels at pattern completion.** Once the structure of one game level (PasswordGame) was established, the AI could generate the second level (DecisionGame) following the same architecture patterns components, state shape, CSS class conventions  with high fidelity.
 
 **Prompt specificity matters.** Vague instructions ("make it more complicated") produce structural changes (more inputs, more bugs) but the specific *which* bugs and *what* rules they break still required domain knowledge about testing methodology that had to be provided explicitly.
 
