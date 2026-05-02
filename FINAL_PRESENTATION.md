@@ -1,4 +1,4 @@
-# Software Quality Assurance — Final Presentation
+# Software Quality Assurance : Final Presentation
 **Student:** Mounika Garikipati
 **Worked:** Individually
 **Date:** May 2026
@@ -11,14 +11,14 @@
 
 Across this course I built and tested **two core applications** that evolved week over week:
 
-#### Application 1 — Triangle Classifier (Projects 1 & 2)
+#### Application 1 : Triangle Classifier (Projects 1 & 2)
 A Python program that takes three side lengths and determines whether they form a valid triangle, and if so what type (Equilateral, Isosceles, or Scalene). This was extended into a full **Flask REST API** for Project 2.
 
 - Built with: **Python + Flask**
 - Tested with: **PyUnit (unittest)** and **Postman**
 - Hosted: locally on `http://127.0.0.1:5000`
 
-#### Application 2 — QA Arcade (Projects 3 & 4 + All Vibe Coding)
+#### Application 2 : QA Arcade (Projects 3 & 4 + All Vibe Coding)
 A gamified React web app that teaches software testing methodology through One Piece-themed boss battles. Players act as QA testers finding intentional bugs planted in password checkers, restaurant billing systems, and combat engines.
 
 - Built with: **React 18 + Vite**, deployed to **GitHub Pages**
@@ -37,10 +37,10 @@ The Triangle app was coded manually in Python following the classic example from
 | **Replit Agent** | Scaffolded the initial QA Arcade React app structure and CSS |
 | **Antigravity** | Assisted with specific component generation and layout |
 
-### Screenshot — QA Arcade Main Menu
+### Screenshot : QA Arcade Main Menu
 > 📸 *[Insert screenshot of QA Arcade main menu showing all 3 boss battle cards]*
 
-### Screenshot — Triangle API in Postman
+### Screenshot : Triangle API in Postman
 > 📸 *[Insert screenshot of POST /triangles returning Scalene result]*
 
 ---
@@ -49,7 +49,7 @@ The Triangle app was coded manually in Python following the classic example from
 
 ---
 
-### Project 1: Unit Testing — Triangle Classifier
+### Project 1: Unit Testing - Triangle Classifier
 
 **Goal:** Write comprehensive unit tests for a triangle classification function using Python's `unittest` framework.
 
@@ -72,7 +72,7 @@ The Triangle app was coded manually in Python following the classic example from
 **Key Lesson:** Boundary values and order variations are easy to miss without systematic testing. Input (5,3,4) must produce the same result as (3,4,5).
 
 ### Screenshot — Unit Test Output
-> 📸 *[Insert screenshot of terminal showing "Ran 10 tests OK"]*
+![img_2.png](project1/img_2.png)
 
 ---
 
@@ -99,19 +99,12 @@ The Triangle app was coded manually in Python following the classic example from
 
 **Key Lesson:** Integration testing catches issues that unit tests miss — for example, verifying that HTTP status codes (404 vs 200) are returned correctly, not just that the logic works in isolation.
 
-### Screenshot — Postman POST Request
-> 📸 *[Insert screenshot of Postman POST /triangles returning Scalene]*
-
-### Screenshot — 404 Error Case
-> 📸 *[Insert screenshot of GET /triangles/2 returning error: Triangle not found]*
-
----
 
 ### Project 3: Performance Testing — JMeter on QA Arcade
 
 **Goal:** Simulate realistic and extreme traffic against the deployed GitHub Pages QA Arcade app using Apache JMeter.
 
-**Test 1 — Endurance Test (Soak Test)**
+**Test 1 : Endurance Test (Soak Test)**
 
 Sustained moderate load over time to detect memory leaks or server degradation.
 
@@ -122,7 +115,7 @@ Sustained moderate load over time to detect memory leaks or server degradation.
 | Error Rate | **0.08%** |
 | Verdict | ✅ Excellent stability |
 
-**Test 2 — Spike Test**
+**Test 2 : Spike Test**
 
 500 simultaneous users within a 1-second ramp-up — simulating a viral moment.
 
@@ -137,21 +130,21 @@ Sustained moderate load over time to detect memory leaks or server degradation.
 
 **Key Lesson:** GitHub Pages is remarkably resilient for a static host. The spike tripled response time but never produced errors — a great result for a frontend-only app. For a backend API with database calls, these numbers would look very different.
 
-### Screenshot — Endurance Test Summary Report
-> 📸 *[Insert screenshot of JMeter Summary Report for endurance test]*
+### Screenshot : Endurance Test Summary Report
+![end_summary.png](project%203/end_summary.png)
 
-### Screenshot — Spike Test Summary Report
-> 📸 *[Insert screenshot of JMeter Summary Report for spike test]*
 
+### Screenshot : Spike Test Summary Report
+![spicke_summary.png](project%203/spicke_summary.png)
 ---
 
-### Project 4: Browser Automation — Selenium on QA Arcade
+### Project 4: Browser Automation : Selenium on QA Arcade
 
 **Goal:** Write automated Selenium tests in Python to interact with the deployed QA Arcade app and verify that the game mechanics work correctly.
 
 **3 Test Classes, 21 Total Tests:**
 
-#### Test 1 — Main Menu Navigation (6 tests)
+#### Test 1 : Main Menu Navigation (6 tests)
 Verified the menu loads with all 3 boss battle cards, all 3 play buttons are enabled, and navigation into a level and back works correctly.
 
 | Test | Result |
@@ -163,7 +156,7 @@ Verified the menu loads with all 3 boss battle cards, all 3 play buttons are ena
 | All 3 play buttons enabled | ✅ Pass |
 | Navigate into Arlong and back | ✅ Pass |
 
-#### Test 2 — Arlong Park: State Transition Bug (7 tests)
+#### Test 2 : Arlong Park: State Transition Bug (7 tests)
 Selected FROM=Calm, TO=Defeated and verified the bug banner appeared confirming the spec says INVALID but the system says VALID.
 
 | Test | Result |
@@ -176,7 +169,7 @@ Selected FROM=Calm, TO=Defeated and verified the bug banner appeared confirming 
 | Expected=INVALID, Actual=VALID | ✅ Pass |
 | Bug counter shows 1/3 | ✅ Pass |
 
-#### Test 3 — Doflamingo: Data Flow Pipeline Bug (8 tests)
+#### Test 3 : Doflamingo: Data Flow Pipeline Bug (8 tests)
 Selected Injured/Awakened=Yes/Distance=1m and verified Expected=97, Actual=108, exposing 3 simultaneous data flow bugs.
 
 | Test | Result |
@@ -197,17 +190,14 @@ Selected Injured/Awakened=Yes/Distance=1m and verified Expected=97, Actual=108, 
 - Third card (Doflamingo) rendered off-screen, causing empty text — fixed with `--force-device-scale-factor=0.67` and scroll-into-view
 - GitHub Pages + React hydration timing required custom `WebDriverWait` polling for non-empty text content, not just element visibility
 
-### Screenshot — All 21 Tests Passing
-> 📸 *[Insert screenshot of terminal showing "Ran 21 tests OK"]*
+### Screenshot : All 21 Tests Passing
+![img_1.png](img_1.png)
 
-### Screenshot — Browser Running Test 2
-> 📸 *[Insert screenshot of Chrome showing Arlong Park with bug banner]*
 
----
 
 ## Slide 3: Short Demo
 
-### Live Demo — Selenium Test Suite
+### Live Demo : Selenium Test Suite
 
 **What I'll show:**
 1. Run `python qa_arcade_selenium_tests.py` from terminal
